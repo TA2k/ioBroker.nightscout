@@ -36,6 +36,7 @@ class Nightscout extends utils.Adapter {
 
 
 		nsSocket.on("connect", () => {
+			this.setState("info.connection", true, true);
 			this.log.info("connected to socket " + this.config.url);
 			nsSocket.emit(
 				'authorize', {
@@ -137,6 +138,7 @@ class Nightscout extends utils.Adapter {
 			this.setObjectNotExists(urlPost + ".suspended", {
 				type: "state",
 				common: {
+					name: "",
 					role: "indicator",
 					type: "mixed",
 					write: false,
@@ -147,6 +149,7 @@ class Nightscout extends utils.Adapter {
 			this.setObjectNotExists(urlPost + ".uploaderBattery", {
 				type: "state",
 				common: {
+					name: "",
 					role: "indicator",
 					type: "number",
 					write: false,
@@ -192,6 +195,17 @@ class Nightscout extends utils.Adapter {
 				type: "state",
 				common: {
 					name: "mgdl Direction",
+					role: "indicator",
+					type: "mixed",
+					write: false,
+					read: true
+				},
+				native: {}
+			});
+			this.setObjectNotExists(urlPost + ".lastUpdate", {
+				type: "state",
+				common: {
+					name: "",
 					role: "indicator",
 					type: "mixed",
 					write: false,
@@ -284,6 +298,11 @@ class Nightscout extends utils.Adapter {
 				const dataUpdate = data;
 				this.setState(urlPost + ".rawUpdate", JSON.stringify(dataUpdate), true);
 				let len = 0;
+
+				if (dataUpdate.lastUpdate) {
+					this.setState(urlPost + ".lastUpdate", dataUpdate.lastUpdate, true);
+				}
+
 				if (dataUpdate.devicestatus) {
 					len = dataUpdate.devicestatus.length - 1;
 					this.setState(urlPost + ".device", dataUpdate.devicestatus[len].device, true);
