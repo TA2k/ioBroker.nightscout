@@ -31,7 +31,7 @@
 		},
 		"desc": {
 			"en": "adapter to get data from Nighscout page",
-			"de": "Adapter zum Abrufen von Daten von der Nighscout-Seite",
+			"de": "Adapter zum Abrufen von Daten von einer Nighscout Seite",
 			"ru": "адаптер для получения данных со страницы Nighscout",
 			"pt": "adaptador para obter dados da página Nighscout",
 			"nl": "adapter om gegevens te verkrijgen van de Nighscout-pagina",
@@ -70,8 +70,7 @@
 		]
 	},
 	"native": {
-		"option1": true,
-		"option2": "42"
+		"url": ""
 	},
 	"objects": [],
 	"instanceObjects": []

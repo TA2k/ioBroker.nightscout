@@ -1,15 +1,12 @@
+/* eslint-disable quotes */
 "use strict";
 
 /*
  * Created with @iobroker/create-adapter v1.15.1
  */
 
-// The adapter-core module gives you access to the core ioBroker functions
-// you need to create an adapter
 const utils = require("@iobroker/adapter-core");
-
-// Load your modules here, e.g.:
-// const fs = require("fs");
+const io = require("socket.io-client");
 
 class Nightscout extends utils.Adapter {
 
@@ -22,63 +19,273 @@ class Nightscout extends utils.Adapter {
 			name: "nightscout",
 		});
 		this.on("ready", this.onReady.bind(this));
-		this.on("objectChange", this.onObjectChange.bind(this));
-		this.on("stateChange", this.onStateChange.bind(this));
+		//	this.on("objectChange", this.onObjectChange.bind(this));
+		//	this.on("stateChange", this.onStateChange.bind(this));
 		// this.on("message", this.onMessage.bind(this));
 		this.on("unload", this.onUnload.bind(this));
 	}
 
-	/**
-	 * Is called when databases are connected and adapter received configuration.
-	 */
+
 	async onReady() {
-		// Initialize your adapter here
-
-		// The adapters config (in the instance object everything under the attribute "native") is accessible via
-		// this.config:
-		this.log.info("config option1: " + this.config.option1);
-		this.log.info("config option2: " + this.config.option2);
-
-		/*
-		For every state in the system there has to be also an object of type state
-		Here a simple template for a boolean variable named "testVariable"
-		Because every adapter instance uses its own unique namespace variable names can't collide with other adapters variables
-		*/
-		await this.setObjectAsync("testVariable", {
-			type: "state",
-			common: {
-				name: "testVariable",
-				type: "boolean",
-				role: "indicator",
-				read: true,
-				write: true,
-			},
-			native: {},
-		});
-
-		// in this template all states changes inside the adapters namespace are subscribed
 		this.subscribeStates("*");
 
-		/*
-		setState examples
-		you will notice that each setState will cause the stateChange event to fire (because of above subscribeStates cmd)
-		*/
-		// the variable testVariable is set to true as command (ack=false)
-		await this.setStateAsync("testVariable", true);
+		const nsSocket = io(this.config.url, {
+			path: "/socket.io",
 
-		// same thing, but the value is flagged "ack"
-		// ack should be always set to true if the value is received from or acknowledged from the target system
-		await this.setStateAsync("testVariable", { val: true, ack: true });
+		});
 
-		// same thing, but the state is deleted after 30s (getState will return null afterwards)
-		await this.setStateAsync("testVariable", { val: true, ack: true, expire: 30 });
 
-		// examples for the checkPassword/checkGroup functions
-		let result = await this.checkPasswordAsync("admin", "iobroker");
-		this.log.info("check user admin pw ioboker: " + result);
+		nsSocket.on("connect", () => {
+			this.log.info("connected to socket " + this.config.url);
+			nsSocket.emit(
+				'authorize', {
+					client: 'web',
+					secret: null,
+					history: 48
+				}
 
-		result = await this.checkGroupAsync("admin", "admin");
-		this.log.info("check group user admin group admin: " + result);
+			);
+			const urlPost = this.config.url.split("/")[2].split(".")[0];
+			this.setObjectNotExists(urlPost, {
+				type: "state",
+				common: {
+					name: this.config.url,
+					role: "indicator",
+					type: "mixed",
+					write: false,
+					read: true
+				},
+				native: {}
+			});
+			this.setObjectNotExists(urlPost + ".device", {
+				type: "state",
+				common: {
+					name: "",
+					role: "indicator",
+					type: "mixed",
+					write: false,
+					read: true
+				},
+				native: {}
+			});
+			this.setObjectNotExists(urlPost + ".pumpBattery", {
+				type: "state",
+				common: {
+					name: "",
+					role: "indicator",
+					type: "mixed",
+					write: false,
+					read: true
+				},
+				native: {}
+			});
+			this.setObjectNotExists(urlPost + ".clock", {
+				type: "state",
+				common: {
+					name: "",
+					role: "indicator",
+					type: "mixed",
+					write: false,
+					read: true
+				},
+				native: {}
+			});
+			this.setObjectNotExists(urlPost + ".bolusiob", {
+				type: "state",
+				common: {
+					name: "",
+					role: "indicator",
+					type: "mixed",
+					write: false,
+					read: true
+				},
+				native: {}
+			});
+			this.setObjectNotExists(urlPost + ".reservoir", {
+				type: "state",
+				common: {
+					name: "",
+					role: "indicator",
+					type: "mixed",
+					write: false,
+					read: true
+				},
+				native: {}
+			});
+			this.setObjectNotExists(urlPost + ".bolusing", {
+				type: "state",
+				common: {
+					name: "",
+					role: "indicator",
+					type: "mixed",
+					write: false,
+					read: true
+				},
+				native: {}
+			});
+			this.setObjectNotExists(urlPost + ".status", {
+				type: "state",
+				common: {
+					name: "",
+					role: "indicator",
+					type: "mixed",
+					write: false,
+					read: true
+				},
+				native: {}
+			});
+			this.setObjectNotExists(urlPost + ".suspended", {
+				type: "state",
+				common: {
+					role: "indicator",
+					type: "mixed",
+					write: false,
+					read: true
+				},
+				native: {}
+			});
+			this.setObjectNotExists(urlPost + ".uploaderBattery", {
+				type: "state",
+				common: {
+					role: "indicator",
+					type: "mixed",
+					write: false,
+					read: true
+				},
+				native: {}
+			});
+			this.setObjectNotExists(urlPost + ".mgdl", {
+				type: "state",
+				common: {
+					name: "mgdl",
+					role: "indicator",
+					type: "mixed",
+					write: false,
+					read: true
+				},
+				native: {}
+			});
+			this.setObjectNotExists(urlPost + ".mgdlTimestamp", {
+				type: "state",
+				common: {
+					name: "mgdl Timestamp",
+					role: "indicator",
+					type: "mixed",
+					write: false,
+					read: true
+				},
+				native: {}
+			});
+			this.setObjectNotExists(urlPost + ".rawUpdate", {
+				type: "state",
+				common: {
+					name: "raw update as JSON",
+					role: "indicator",
+					type: "mixed",
+					write: false,
+					read: true
+				},
+				native: {}
+			});
+
+		});
+		nsSocket.on("notification", (data) => {
+
+			const urlPost = this.config.url.split("/")[2].split(".")[0];
+			this.log.debug("notification: " + JSON.stringify(data));
+			this.setObjectNotExists(urlPost + ".notification", {
+				type: "state",
+				common: {
+					name: "",
+					role: "indicator",
+					type: "mixed",
+					write: false,
+					read: true
+				},
+				native: {}
+			});
+			this.setObjectNotExists(urlPost + ".notificationTimestamp", {
+				type: "state",
+				common: {
+					name: "",
+					role: "indicator",
+					type: "mixed",
+					write: false,
+					read: true
+				},
+				native: {}
+			});
+			this.setState(urlPost + ".notification", data.title + " " + data.message, true);
+			this.setState(urlPost + ".notificationTimestamp", data.timestamp, true);
+		});
+		nsSocket.on('announcement', (data) => {
+			this.log.info(data);
+		});
+		nsSocket.on('alarm', (data) => {
+
+			const urlPost = this.config.url.split("/")[2].split(".")[0];
+			this.setObjectNotExists(urlPost + ".alarm", {
+				type: "state",
+				common: {
+					name: "",
+					role: "indicator",
+					type: "mixed",
+					write: false,
+					read: true
+				},
+				native: {}
+			});
+			this.setState(urlPost + ".alarm", data, true);
+		});
+		nsSocket.on('urgent_alarm', (data) => {
+
+			const urlPost = this.config.url.split("/")[2].split(".")[0];
+			this.setObjectNotExists(urlPost + ".urgent_alarm", {
+				type: "state",
+				common: {
+					name: "",
+					role: "indicator",
+					type: "mixed",
+					write: false,
+					read: true
+				},
+				native: {}
+			});
+			this.setState(urlPost + ".urgent_alarm", data, true);
+		});
+		nsSocket.on("dataUpdate", (data) => {
+
+			this.log.debug("dataUpdate: " + JSON.stringify(data));
+			const urlPost = this.config.url.split("/")[2].split(".")[0];
+			try {
+				const dataUpdate = data;
+				this.setState(urlPost + ".rawUpdate", JSON.stringify(dataUpdate), true);
+				if (dataUpdate.devicestatus) {
+					this.setState(urlPost + ".device", dataUpdate.devicestatus[0].device, true);
+					this.setState(urlPost + ".pumpBattery", dataUpdate.devicestatus[0].pump.battery.percent, true);
+					this.setState(urlPost + ".clock", dataUpdate.devicestatus[0].pump.clock, true);
+					this.setState(urlPost + ".bolusiob", dataUpdate.devicestatus[0].pump.iob.bolusiob, true);
+					this.setState(urlPost + ".reservoir", dataUpdate.devicestatus[0].pump.reservoir, true);
+					this.setState(urlPost + ".bolusing", dataUpdate.devicestatus[0].pump.status.bolusing, true);
+					this.setState(urlPost + ".status", dataUpdate.devicestatus[0].pump.status.status, true);
+					this.setState(urlPost + ".suspended", dataUpdate.devicestatus[0].pump.status.suspended, true);
+					this.setState(urlPost + ".uploaderBattery", dataUpdate.devicestatus[0].uploader.battery, true);
+				}
+				if (dataUpdate.sgvs) {
+
+					this.setState(urlPost + ".mgdl", dataUpdate.sgvs[0].mgdl, true);
+					this.setState(urlPost + ".mgdlTimestamp", dataUpdate.sgvs[0].mills, true);
+				}
+
+
+
+			} catch (error) {
+				this.log.error("Parse Error: " + error + " " + JSON.stringify(data));
+			}
+		});
+
+		//		await this.setStateAsync("testVariable", true);
+
 	}
 
 	/**
@@ -123,23 +330,6 @@ class Nightscout extends utils.Adapter {
 			this.log.info(`state ${id} deleted`);
 		}
 	}
-
-	// /**
-	//  * Some message was sent to this instance over message box. Used by email, pushover, text2speech, ...
-	//  * Using this method requires "common.message" property to be set to true in io-package.json
-	//  * @param {ioBroker.Message} obj
-	//  */
-	// onMessage(obj) {
-	// 	if (typeof obj === "object" && obj.message) {
-	// 		if (obj.command === "send") {
-	// 			// e.g. send email or pushover or whatever
-	// 			this.log.info("send command");
-
-	// 			// Send response in callback if required
-	// 			if (obj.callback) this.sendTo(obj.from, obj.command, "Message received", obj.callback);
-	// 		}
-	// 	}
-	// }
 
 }
 

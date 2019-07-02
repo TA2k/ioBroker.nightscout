@@ -1,27 +1,39 @@
 {
-  "name": "iobroker.nightscout",
-  "version": "0.0.1",
-  "description": "adapter to get data from Nighscout page",
+  "_from": "https://github.com/TA2k/ioBroker.nightscout/tarball/master",
+  "_id": "iobroker.nightscout@0.0.1",
+  "_inBundle": false,
+  "_integrity": "sha512-64dL2n3sEWvmsYkOTNVuhGCe5EtuzZpCzy+lFwsUJv+Y0zB5hCTQDNKIGYGKL2t7G+U1WUE+M8VDbBpvtSaKUw==",
+  "_location": "/iobroker.nightscout",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "remote",
+    "raw": "https://github.com/TA2k/ioBroker.nightscout/tarball/master",
+    "rawSpec": "https://github.com/TA2k/ioBroker.nightscout/tarball/master",
+    "saveSpec": "https://github.com/TA2k/ioBroker.nightscout/tarball/master",
+    "fetchSpec": "https://github.com/TA2k/ioBroker.nightscout/tarball/master"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://github.com/TA2k/ioBroker.nightscout/tarball/master",
+  "_shasum": "79d32287e1519975b48553bdfedcc393c1aa74bb",
+  "_spec": "https://github.com/TA2k/ioBroker.nightscout/tarball/master",
+  "_where": "/Users/d057119/.Trash",
   "author": {
     "name": "tomboxi",
     "email": "tombox_2020@gmail.com"
   },
-  "homepage": "https://github.com/TA2k/ioBroker.nightscout",
-  "license": "MIT",
-  "keywords": [
-    "nightscout",
-    "cgm",
-    "dexcom",
-    "medtronic",
-    "freestyle"
-  ],
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/TA2k/ioBroker.nightscout"
+  "bugs": {
+    "url": "https://github.com/TA2k/ioBroker.nightscout/issues"
   },
+  "bundleDependencies": false,
   "dependencies": {
-    "@iobroker/adapter-core": "^1.0.3"
+    "@iobroker/adapter-core": "^1.0.3",
+    "socket.io": "^2.2.0"
   },
+  "deprecated": false,
+  "description": "adapter to get data from Nighscout page",
   "devDependencies": {
     "@iobroker/testing": "^1.2.5",
     "@types/chai": "^4.1.7",
@@ -42,17 +54,28 @@
     "sinon": "^7.3.2",
     "sinon-chai": "^3.3.0"
   },
+  "homepage": "https://github.com/TA2k/ioBroker.nightscout",
+  "keywords": [
+    "nightscout",
+    "cgm",
+    "dexcom",
+    "medtronic",
+    "freestyle"
+  ],
+  "license": "MIT",
   "main": "main.js",
+  "name": "iobroker.nightscout",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TA2k/ioBroker.nightscout.git"
+  },
   "scripts": {
+    "lint": "eslint",
+    "test": "npm run test:js && npm run test:package",
+    "test:integration": "mocha test/integration --exit",
     "test:js": "mocha --opts test/mocha.custom.opts",
     "test:package": "mocha test/package --exit",
-    "test:unit": "mocha test/unit --exit",
-    "test:integration": "mocha test/integration --exit",
-    "test": "npm run test:js && npm run test:package",
-    "lint": "eslint"
+    "test:unit": "mocha test/unit --exit"
   },
-  "bugs": {
-    "url": "https://github.com/TA2k/ioBroker.nightscout/issues"
-  },
-  "readmeFilename": "README.md"
+  "version": "0.0.1"
 }
