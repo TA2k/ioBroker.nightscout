@@ -1,0 +1,78 @@
+{
+	"common": {
+		"name": "nightscout",
+		"version": "0.0.1",
+		"news": {
+			"0.0.1": {
+				"en": "initial release",
+				"de": "Erstveröffentlichung",
+				"ru": "Начальная версия",
+				"pt": "lançamento inicial",
+				"nl": "Eerste uitgave",
+				"fr": "Première version",
+				"it": "Versione iniziale",
+				"es": "Versión inicial",
+				"pl": "Pierwsze wydanie",
+				"zh-cn": "首次出版"
+			}
+		},
+		"title": "Nightscout",
+		"titleLang": {
+			"en": "Nightscout",
+			"de": "Nachtscout",
+			"ru": "Nightscout",
+			"pt": "Nightscout",
+			"nl": "Nightscout",
+			"fr": "Soirée nocturne",
+			"it": "Nightscout",
+			"es": "Nocturno",
+			"pl": "Nocna noc",
+			"zh-cn": "Nightscout"
+		},
+		"desc": {
+			"en": "adapter to get data from Nighscout page",
+			"de": "Adapter zum Abrufen von Daten von der Nighscout-Seite",
+			"ru": "адаптер для получения данных со страницы Nighscout",
+			"pt": "adaptador para obter dados da página Nighscout",
+			"nl": "adapter om gegevens te verkrijgen van de Nighscout-pagina",
+			"fr": "adaptateur pour obtenir des données de la page Nighscout",
+			"it": "adattatore per ottenere dati dalla pagina di Nighscout",
+			"es": "adaptador para obtener datos de la página Nighscout",
+			"pl": "adapter do pobierania danych ze strony Nighscout",
+			"zh-cn": "适配器从Nighscout页面获取数据"
+		},
+		"authors": [
+			"tomboxi <tombox_2020@gmail.com>"
+		],
+		"keywords": [
+			"nightscout",
+			"cgm",
+			"dexcom",
+			"medtronic",
+			"freestyle"
+		],
+		"license": "MIT",
+		"platform": "Javascript/Node.js",
+		"main": "main.js",
+		"icon": "nightscout.png",
+		"enabled": true,
+		"extIcon": "https://raw.githubusercontent.com/TA2k/ioBroker.nightscout/master/admin/nightscout.png",
+		"readme": "https://github.com/TA2k/ioBroker.nightscout/blob/master/README.md",
+		"loglevel": "info",
+		"mode": "daemon",
+		"type": "household",
+		"compact": true,
+		"materialize": true,
+		"dependencies": [
+			{
+				"js-controller": ">=1.4.2"
+			}
+		]
+	},
+	"native": {
+		"option1": true,
+		"option2": "42"
+	},
+	"objects": [],
+	"instanceObjects": []
+}
