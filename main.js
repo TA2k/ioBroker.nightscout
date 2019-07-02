@@ -73,7 +73,7 @@ class Nightscout extends utils.Adapter {
 				common: {
 					name: "",
 					role: "indicator",
-					type: "mixed",
+					type: "number",
 					write: false,
 					read: true
 				},
@@ -106,7 +106,7 @@ class Nightscout extends utils.Adapter {
 				common: {
 					name: "",
 					role: "indicator",
-					type: "mixed",
+					type: "number",
 					write: false,
 					read: true
 				},
@@ -148,7 +148,7 @@ class Nightscout extends utils.Adapter {
 				type: "state",
 				common: {
 					role: "indicator",
-					type: "mixed",
+					type: "number",
 					write: false,
 					read: true
 				},
@@ -158,7 +158,7 @@ class Nightscout extends utils.Adapter {
 				type: "state",
 				common: {
 					name: "mgdl",
-					role: "indicator",
+					role: "number",
 					type: "mixed",
 					write: false,
 					read: true
@@ -166,6 +166,29 @@ class Nightscout extends utils.Adapter {
 				native: {}
 			});
 			this.setObjectNotExists(urlPost + ".mgdlTimestamp", {
+				type: "state",
+				common: {
+					name: "mgdl Timestamp",
+					role: "indicator",
+					type: "mixed",
+					write: false,
+					read: true
+				},
+				native: {}
+			});
+
+			this.setObjectNotExists(urlPost + ".mgdlScaled", {
+				type: "state",
+				common: {
+					name: "mgdl Timestamp",
+					role: "number",
+					type: "mixed",
+					write: false,
+					read: true
+				},
+				native: {}
+			});
+			this.setObjectNotExists(urlPost + ".mgdlDirection", {
 				type: "state",
 				common: {
 					name: "mgdl Timestamp",
@@ -260,21 +283,25 @@ class Nightscout extends utils.Adapter {
 			try {
 				const dataUpdate = data;
 				this.setState(urlPost + ".rawUpdate", JSON.stringify(dataUpdate), true);
+				let len = 0;
 				if (dataUpdate.devicestatus) {
-					this.setState(urlPost + ".device", dataUpdate.devicestatus[0].device, true);
-					this.setState(urlPost + ".pumpBattery", dataUpdate.devicestatus[0].pump.battery.percent, true);
-					this.setState(urlPost + ".clock", dataUpdate.devicestatus[0].pump.clock, true);
-					this.setState(urlPost + ".bolusiob", dataUpdate.devicestatus[0].pump.iob.bolusiob, true);
-					this.setState(urlPost + ".reservoir", dataUpdate.devicestatus[0].pump.reservoir, true);
-					this.setState(urlPost + ".bolusing", dataUpdate.devicestatus[0].pump.status.bolusing, true);
-					this.setState(urlPost + ".status", dataUpdate.devicestatus[0].pump.status.status, true);
-					this.setState(urlPost + ".suspended", dataUpdate.devicestatus[0].pump.status.suspended, true);
-					this.setState(urlPost + ".uploaderBattery", dataUpdate.devicestatus[0].uploader.battery, true);
+					len = dataUpdate.devicestatus.length - 1;
+					this.setState(urlPost + ".device", dataUpdate.devicestatus[len].device, true);
+					this.setState(urlPost + ".pumpBattery", dataUpdate.devicestatus[len].pump.battery.percent, true);
+					this.setState(urlPost + ".clock", dataUpdate.devicestatus[len].pump.clock, true);
+					this.setState(urlPost + ".bolusiob", dataUpdate.devicestatus[len].pump.iob.bolusiob, true);
+					this.setState(urlPost + ".reservoir", dataUpdate.devicestatus[len].pump.reservoir, true);
+					this.setState(urlPost + ".bolusing", dataUpdate.devicestatus[len].pump.status.bolusing, true);
+					this.setState(urlPost + ".status", dataUpdate.devicestatus[len].pump.status.status, true);
+					this.setState(urlPost + ".suspended", dataUpdate.devicestatus[len].pump.status.suspended, true);
+					this.setState(urlPost + ".uploaderBattery", dataUpdate.devicestatus[len].uploader.battery, true);
 				}
 				if (dataUpdate.sgvs) {
-
-					this.setState(urlPost + ".mgdl", dataUpdate.sgvs[0].mgdl, true);
-					this.setState(urlPost + ".mgdlTimestamp", dataUpdate.sgvs[0].mills, true);
+					len = dataUpdate.sgvs.length - 1;
+					this.setState(urlPost + ".mgdl", dataUpdate.sgvs[len].mgdl, true);
+					this.setState(urlPost + ".mgdlScaled", dataUpdate.sgvs[len].scaled, true);
+					this.setState(urlPost + ".mgdlDirection", dataUpdate.sgvs[len].direction, true);
+					this.setState(urlPost + ".mgdlTimestamp", dataUpdate.sgvs[len].mills, true);
 				}
 
 
