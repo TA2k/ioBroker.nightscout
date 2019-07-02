@@ -300,7 +300,7 @@ class Nightscout extends utils.Adapter {
 				let len = 0;
 
 				if (dataUpdate.lastUpdate) {
-					this.setState(urlPost + ".lastUpdate", dataUpdate.lastUpdate, true);
+					this.setState(urlPost + ".lastUpdate", dataUpdate.lastUpdated, true);
 				}
 
 				if (dataUpdate.devicestatus) {
