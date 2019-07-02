@@ -180,7 +180,7 @@ class Nightscout extends utils.Adapter {
 			this.setObjectNotExists(urlPost + ".mgdlScaled", {
 				type: "state",
 				common: {
-					name: "mgdl Timestamp",
+					name: "mgdl Scaled",
 					role: "number",
 					type: "mixed",
 					write: false,
@@ -191,7 +191,7 @@ class Nightscout extends utils.Adapter {
 			this.setObjectNotExists(urlPost + ".mgdlDirection", {
 				type: "state",
 				common: {
-					name: "mgdl Timestamp",
+					name: "mgdl Direction",
 					role: "indicator",
 					type: "mixed",
 					write: false,
