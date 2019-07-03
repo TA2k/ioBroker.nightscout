@@ -1,9 +1,9 @@
 {
 	"common": {
 		"name": "nightscout",
-		"version": "0.0.3",
+		"version": "0.0.4",
 		"news": {
-			"0.0.3": {
+			"0.0.4": {
 				"en": "minor improvments"
 			},
 			"0.0.1": {
@@ -22,14 +22,14 @@
 		"title": "Nightscout",
 		"titleLang": {
 			"en": "Nightscout",
-			"de": "Nachtscout",
+			"de": "Nightscout",
 			"ru": "Nightscout",
 			"pt": "Nightscout",
 			"nl": "Nightscout",
-			"fr": "Soirée nocturne",
+			"fr": "Nightscout",
 			"it": "Nightscout",
-			"es": "Nocturno",
-			"pl": "Nocna noc",
+			"es": "Nightscout",
+			"pl": "Nightscout",
 			"zh-cn": "Nightscout"
 		},
 		"desc": {
