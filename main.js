@@ -27,8 +27,7 @@ class Nightscout extends utils.Adapter {
 
 
 	async onReady() {
-		this.subscribeStates("*");
-
+		this.setState("info.connection", false, true);
 		const nsSocket = io(this.config.url, {
 			path: "/socket.io",
 

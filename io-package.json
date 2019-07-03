@@ -1,8 +1,11 @@
 {
 	"common": {
 		"name": "nightscout",
-		"version": "0.0.2",
+		"version": "0.0.3",
 		"news": {
+			"0.0.3": {
+				"en": "minor improvments"
+			},
 			"0.0.1": {
 				"en": "initial release",
 				"de": "Erstveröffentlichung",
@@ -30,16 +33,16 @@
 			"zh-cn": "Nightscout"
 		},
 		"desc": {
-			"en": "adapter to get data from Nighscout page",
-			"de": "Adapter zum Abrufen von Daten von einer Nighscout Seite",
-			"ru": "адаптер для получения данных со страницы Nighscout",
-			"pt": "adaptador para obter dados da página Nighscout",
-			"nl": "adapter om gegevens te verkrijgen van de Nighscout-pagina",
-			"fr": "adaptateur pour obtenir des données de la page Nighscout",
-			"it": "adattatore per ottenere dati dalla pagina di Nighscout",
-			"es": "adaptador para obtener datos de la página Nighscout",
-			"pl": "adapter do pobierania danych ze strony Nighscout",
-			"zh-cn": "适配器从Nighscout页面获取数据"
+			"en": "adapter to get data from Nightscout (CGM in the Cloud) page",
+			"de": "Adapter zum Abrufen von Daten von einer Nightscout (CGM in the Cloud) Seite",
+			"ru": "адаптер для получения данных со страницы Nightscout (CGM in the Cloud)",
+			"pt": "adaptador para obter dados da página Nightscout (CGM in the Cloud)",
+			"nl": "adapter om gegevens te verkrijgen van de Nightscout (CGM in the Cloud)-pagina",
+			"fr": "adaptateur pour obtenir des données de la page Nightscout (CGM in the Cloud)",
+			"it": "adattatore per ottenere dati dalla pagina di Nightscout (CGM in the Cloud)",
+			"es": "adaptador para obtener datos de la página Nightscout (CGM in the Cloud)",
+			"pl": "adapter do pobierania danych ze strony Nightscout (CGM in the Cloud)",
+			"zh-cn": "适配器从Nightscout (CGM in the Cloud)页面获取数据"
 		},
 		"authors": [
 			"tomboxi <tombox_2020@gmail.com>"
