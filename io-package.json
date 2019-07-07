@@ -1,10 +1,19 @@
 {
 	"common": {
 		"name": "nightscout",
-		"version": "0.0.4",
+		"version": "0.0.5",
 		"news": {
-			"0.0.4": {
-				"en": "minor improvments"
+			"0.0.5": {
+				"en": "minor improvments",
+				"de": "kleinere Verbesserungen",
+				"ru": "незначительные улучшения",
+				"pt": "pequenas melhorias",
+				"nl": "kleine verbeteringen",
+				"fr": "petites améliorations",
+				"it": "piccoli miglioramenti",
+				"es": "mejoras menores",
+				"pl": "drobne poprawki",
+				"zh-cn": "小改进"
 			},
 			"0.0.1": {
 				"en": "initial release",
@@ -76,5 +85,27 @@
 		"url": ""
 	},
 	"objects": [],
-	"instanceObjects": []
+	"instanceObjects": [
+		{
+			"_id": "info",
+			"type": "channel",
+			"common": {
+				"name": "Information"
+			},
+			"native": {}
+		},
+		{
+			"_id": "info.connection",
+			"type": "state",
+			"common": {
+				"role": "indicator.connected",
+				"name": "Device or service connected",
+				"type": "boolean",
+				"read": true,
+				"write": false,
+				"def": false
+			},
+			"native": {}
+		}
+	]
 }

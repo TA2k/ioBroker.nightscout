@@ -302,7 +302,7 @@ class Nightscout extends utils.Adapter {
 					this.setState(urlPost + ".lastUpdate", dataUpdate.lastUpdated, true);
 				}
 
-				if (dataUpdate.devicestatus) {
+				if (dataUpdate.devicestatus && dataUpdate.devicestatus.length !== 0) {
 					len = dataUpdate.devicestatus.length - 1;
 					this.setState(urlPost + ".device", dataUpdate.devicestatus[len].device, true);
 					this.setState(urlPost + ".pumpBattery", dataUpdate.devicestatus[len].pump.battery.percent, true);
@@ -314,7 +314,7 @@ class Nightscout extends utils.Adapter {
 					this.setState(urlPost + ".suspended", dataUpdate.devicestatus[len].pump.status.suspended, true);
 					this.setState(urlPost + ".uploaderBattery", dataUpdate.devicestatus[len].uploader.battery, true);
 				}
-				if (dataUpdate.sgvs) {
+				if (dataUpdate.sgvs && dataUpdate.devicestatus.sgvs !== 0) {
 					len = dataUpdate.sgvs.length - 1;
 					this.setState(urlPost + ".mgdl", dataUpdate.sgvs[len].mgdl, true);
 					this.setState(urlPost + ".mgdlScaled", dataUpdate.sgvs[len].scaled, true);
