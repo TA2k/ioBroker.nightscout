@@ -17,7 +17,7 @@ adapter to get data from Nighscout page. Nightscout (CGM in the Cloud) is an ope
 
 ## Changelog
 
-### 0.0.5
+### 0.0.6
 
 -   (tomboxi) minor improvments
 
