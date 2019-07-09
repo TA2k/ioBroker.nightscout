@@ -33,7 +33,9 @@ class Nightscout extends utils.Adapter {
 
 		});
 
-
+		nsSocket.on('disconnect', () => {
+			this.setState('info.connection', false, true);
+		});
 		nsSocket.on("connect", () => {
 			this.setState("info.connection", true, true);
 			this.log.info("connected to socket " + this.config.url);
