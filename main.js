@@ -307,14 +307,20 @@ class Nightscout extends utils.Adapter {
 				if (dataUpdate.devicestatus && dataUpdate.devicestatus.length !== 0) {
 					len = dataUpdate.devicestatus.length - 1;
 					this.setState(urlPost + ".device", dataUpdate.devicestatus[len].device, true);
-					this.setState(urlPost + ".pumpBattery", dataUpdate.devicestatus[len].pump.battery.percent, true);
-					this.setState(urlPost + ".clock", dataUpdate.devicestatus[len].pump.clock, true);
-					this.setState(urlPost + ".bolusiob", dataUpdate.devicestatus[len].pump.iob.bolusiob, true);
-					this.setState(urlPost + ".reservoir", dataUpdate.devicestatus[len].pump.reservoir, true);
-					this.setState(urlPost + ".bolusing", dataUpdate.devicestatus[len].pump.status.bolusing, true);
-					this.setState(urlPost + ".status", dataUpdate.devicestatus[len].pump.status.status, true);
-					this.setState(urlPost + ".suspended", dataUpdate.devicestatus[len].pump.status.suspended, true);
-					this.setState(urlPost + ".uploaderBattery", dataUpdate.devicestatus[len].uploader.battery, true);
+					if (dataUpdate.devicestatus[len].pump) {
+						this.setState(urlPost + ".pumpBattery", dataUpdate.devicestatus[len].pump.battery.percent, true);
+						this.setState(urlPost + ".clock", dataUpdate.devicestatus[len].pump.clock, true);
+						this.setState(urlPost + ".bolusiob", dataUpdate.devicestatus[len].pump.iob.bolusiob, true);
+						this.setState(urlPost + ".reservoir", dataUpdate.devicestatus[len].pump.reservoir, true);
+						this.setState(urlPost + ".bolusing", dataUpdate.devicestatus[len].pump.status.bolusing, true);
+						this.setState(urlPost + ".status", dataUpdate.devicestatus[len].pump.status.status, true);
+						this.setState(urlPost + ".suspended", dataUpdate.devicestatus[len].pump.status.suspended, true);
+					}
+					if (dataUpdate.devicestatus[len].uploader) {
+
+						this.setState(urlPost + ".uploaderBattery", dataUpdate.devicestatus[len].uploader.battery, true);
+					}
+
 				}
 				if (dataUpdate.sgvs && dataUpdate.sgvs.length !== 0) {
 					len = dataUpdate.sgvs.length - 1;

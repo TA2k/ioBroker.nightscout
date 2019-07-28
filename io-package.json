@@ -1,8 +1,20 @@
 {
 	"common": {
 		"name": "nightscout",
-		"version": "0.0.7",
+		"version": "0.0.8",
 		"news": {
+			"0.0.8": {
+				"en": "minor improvments",
+				"de": "kleinere Verbesserungen",
+				"ru": "незначительные улучшения",
+				"pt": "pequenas melhorias",
+				"nl": "kleine verbeteringen",
+				"fr": "petites améliorations",
+				"it": "piccoli miglioramenti",
+				"es": "mejoras menores",
+				"pl": "drobne poprawki",
+				"zh-cn": "小改进"
+			},
 			"0.0.7": {
 				"en": "minor improvments",
 				"de": "kleinere Verbesserungen",
