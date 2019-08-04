@@ -29,12 +29,13 @@ class Nightscout extends utils.Adapter {
 
 	async onReady() {
 		this.setState("info.connection", false, true);
-		
-		https.globalAgent.options.rejectUnauthorized = false;
+		if (this.config.allowSelfSigned) {			
+			https.globalAgent.options.rejectUnauthorized = false;
+		}
 		
 		const nsSocket = io(this.config.url, {
 			path: "/socket.io",
-                        agent: adapter.config.allowSelfSigned ? https.globalAgent : undefined
+            agent: this.config.allowSelfSigned ? https.globalAgent : undefined
 		});
 
 		nsSocket.on('disconnect', () => {
@@ -44,9 +45,9 @@ class Nightscout extends utils.Adapter {
 			this.setState("info.connection", true, true);
 			this.log.info("connected to socket " + this.config.url);
 			let secret = null;
-			if (adapter.config.secret) {
+			if (this.config.secret) {
 				var shasum = crypto.createHash('sha1');
-			    shasum.update(adapter.config.secret);
+			    shasum.update(this.config.secret);
 			    secret = shasum.digest('hex');
 			}
 			
