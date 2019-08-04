@@ -8,6 +8,7 @@
 const utils = require("@iobroker/adapter-core");
 const io = require("socket.io-client");
 const https = require('https');
+const crypto = require('crypto');
 
 class Nightscout extends utils.Adapter {
 
