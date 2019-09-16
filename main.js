@@ -7,6 +7,8 @@
 
 const utils = require("@iobroker/adapter-core");
 const io = require("socket.io-client");
+const https = require('https');
+const crypto = require('crypto');
 
 class Nightscout extends utils.Adapter {
 
@@ -28,9 +30,13 @@ class Nightscout extends utils.Adapter {
 
 	async onReady() {
 		this.setState("info.connection", false, true);
+		if (this.config.allowSelfSigned) {			
+			https.globalAgent.options.rejectUnauthorized = false;
+		}
+		
 		const nsSocket = io(this.config.url, {
 			path: "/socket.io",
-
+            agent: this.config.allowSelfSigned ? https.globalAgent : undefined
 		});
 
 		nsSocket.on('disconnect', () => {
@@ -39,10 +45,18 @@ class Nightscout extends utils.Adapter {
 		nsSocket.on("connect", () => {
 			this.setState("info.connection", true, true);
 			this.log.info("connected to socket " + this.config.url);
+			let secret = null;
+			if (this.config.secret) {
+				var shasum = crypto.createHash('sha1');
+			    shasum.update(this.config.secret);
+			    secret = shasum.digest('hex');
+			}
+			
+			
 			nsSocket.emit(
 				'authorize', {
-					client: 'web',
-					secret: null,
+					client: 'iobroker',
+					secret: secret,
 					history: 48
 				}
 

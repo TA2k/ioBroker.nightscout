@@ -94,7 +94,9 @@
 		]
 	},
 	"native": {
-		"url": ""
+		"url": "",
+		"secret": "",
+		"allowSelfSigned": false
 	},
 	"objects": [],
 	"instanceObjects": [
